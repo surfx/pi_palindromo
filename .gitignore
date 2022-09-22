@@ -30,3 +30,5 @@
 *.exe
 *.out
 *.app
+executaveis/main
+arquivos/controle/controle.txt

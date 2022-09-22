@@ -9,6 +9,9 @@
 #include "Util.h"
 #include "MemInfo.h"
 
+#include <thread> // std::this_thread::sleep_for
+#include <chrono> // std::chrono::seconds
+
 class PalindromoAnalise
 {
 private:
@@ -26,7 +29,9 @@ private:
 
         char *v1 = arq.readPos(posInitial);
         char *v2 = arq.readPos(posFinal); // strcmp = 0 - iguais
-        return strcmp(v1, v2) == 0 ? ispalidromerecur(posInitial + 1, posFinal - 1) : 0;
+        bool comparacao = strcmp(v1, v2) == 0;
+        delete v1, v2;
+        return comparacao ? ispalidromerecur(posInitial + 1, posFinal - 1) : 0;
     }
 
 public:
@@ -82,6 +87,7 @@ public:
 
                 if (Util::isPrime(valorStr) == 0)
                 {
+                    delete valorStr;
                     rtAux = 0; // não é primo
                     start++;
                     end++;
@@ -102,9 +108,12 @@ public:
                     ctrl.saveControl(rt);
 
                     arq.close();
+
+                    delete valorStr;
                     return rt;
                 }
                 // cout << valorStr << ", prime: " << isPrime(valorStr) << endl;
+                delete valorStr;
             }
 
             if (start % limiar_save_ctrl == 0)
@@ -118,6 +127,12 @@ public:
                 unsigned long memoriaDisponivel = MemInfo::getMemoriaDisponivel();
                 std::cout << "Análise de memória, disponível: " << memoriaDisponivel;
                 std::cout << " [" << start << ", " << end << "]" << std::endl;
+
+                if (MemInfo::limiarAceito(40.0) == 0)
+                {
+                    std::cout << "Waiting 10s" << std::endl;
+                    std::this_thread::sleep_for(std::chrono::seconds(10));
+                }
 
                 if (MemInfo::limiarAceito() == 0)
                 {
