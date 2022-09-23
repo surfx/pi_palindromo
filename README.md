@@ -24,18 +24,47 @@ $ gsutil -m rsync -R gs://pi100t ./
 
 # Extrair Número Pi
 
+## DigitViewer
+
 Baixar e compilar o [DigitViewer](https://github.com/Mysticial/DigitViewer)
 
-```
-cd /home/emerson/Desktop/eme/projetos/digitviewer/DigitViewer/VSS\ -\ DigitViewer2/Binaries/
-./Digit\ Viewer\ -\ 05-A64
+Para compilar: `../DigitViewer/VSS - DigitViewer2/Compile-Linux.sh`, vai criar a pasta `Binaries`
 
-/home/emerson/Documents/pi_files/Pi - Dec - Chudnovsky - 0.ycd
-/home/emerson/Documents/pi_files/saida0.txt
+## Extrair número Pi para txt
+
+### Executar:
+
+`cd /home/emerson/Desktop/eme/projetos/digitviewer/DigitViewer/VSS\ -\ DigitViewer2/Binaries/;./Digit\ Viewer\ -\ 05-A64`
+
+### Informar o arquivo de interesse:
+
+`/home/emerson/Documents/pi_files/Pi - Dec - Chudnovsky - 0.ycd`
+
+### Selecione a opção `2`
 
 
-head -c 50 /home/emerson/Documents/pi_files/saida0.txt
-```
+| Arquivo | Range Inicial    | Range Final    |
+| :---:   | :---: | :---: |
+| Pi - Dec - Chudnovsky - 0.ycd | 1   | 100000000000   |
+| Pi - Dec - Chudnovsky - 1.ycd | 100000000001   | 200000000000   |
+| Pi - Dec - Chudnovsky - 2.ycd | 200000000001   | 300000000000   |
+| ... | ...    | ...    |
+
+O range inicial e final depende do arquivo de interesse:
+
+- `Pi - Dec - Chudnovsky - 0.ycd`: de `1` a `100000000000`
+- `Pi - Dec - Chudnovsky - 1.ycd`: de `100000000001` (100000000000 + 1) a `200000000000`
+- `Pi - Dec - Chudnovsky - 2.ycd`: de `200000000001` (200000000000 + 1) a `300000000000`
+
+**OBS**: Caso sejam informados valores maiores ou menores, o [DigitViewer](https://github.com/Mysticial/DigitViewer) vai usar os arquivos anteriores ou subsequentes, senão encontrar gera uma exceção.
+
+### O arquivo de saída:
+
+`/home/emerson/Documents/pi_files/saida0.txt`
+
+### Para visualizar os 50 primeiros:
+
+`head -c 50 /home/emerson/Documents/pi_files/saida0.txt`
 
 # urls
 
@@ -44,3 +73,8 @@ head -c 50 /home/emerson/Documents/pi_files/saida0.txt
 - [pi2e](https://pi2e.ch/blog/2017/03/10/pi-digits-download/#download)
 - [api](https://api.pi.delivery/v1/pi?start=100000000000000&numberOfDigits=100&radix=10)
 - [DigitViewer](https://github.com/Mysticial/DigitViewer)
+
+# discussões
+
+- [issues](https://github.com/Mysticial/y-cruncher/issues)
+- [DigitViewer Fórum 1](https://github.com/Mysticial/y-cruncher/issues/19)

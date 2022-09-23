@@ -6,8 +6,7 @@ using namespace std;
 
 const char FILECONTROLPATH[] = "/home/emerson/Desktop/eme/projetos/pi_palindromo/arquivos/controle/controle.txt";
 // const char FILEPATH[] = "/home/emerson/Desktop/eme/projetos/picpp/arquivos/Pi - Dec.txt";
-//  const char FILEPATH[] = "/home/emerson/Desktop/eme/projetos/picpp/arquivos/Pi - Dec.txt"; // lenght: 1000000002
-const char FILEPATH[] = "/home/emerson/Documents/pi_files/saida0.txt";
+const char FILEPATH[] = "/home/emerson/Documents/pi_files/saida1.txt";
 
 void findPalindrome()
 {
