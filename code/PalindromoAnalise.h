@@ -17,7 +17,7 @@ class PalindromoAnalise
 private:
     Arquivos arq;
     SalvarControle ctrl;
-    const int tempo_espera_segundos = 40;
+    const int tempo_espera_segundos = 3;
     const int limiar_save_ctrl = 100000;
     const int limiar_analise_mem = 2000000;
 
@@ -129,7 +129,7 @@ public:
                 std::cout << "Análise de memória, disponível: " << memoriaDisponivel;
                 std::cout << " [" << start << ", " << end << "]" << std::endl;
 
-                if (MemInfo::limiarAceito(40.0) == 0)
+                if (tempo_espera_segundos > 0 && MemInfo::limiarAceito(40.0) == 0)
                 {
                     std::cout << "Waiting " << tempo_espera_segundos << "s" << std::endl;
                     std::this_thread::sleep_for(std::chrono::seconds(tempo_espera_segundos));
