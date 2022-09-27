@@ -25,6 +25,9 @@ $ gsutil -m rsync -R gs://pi100t ./
 - [Pi - Dec - Chudnovsky - 5.ycd](https://storage.googleapis.com/pi100t/Pi%20-%20Dec%20-%20Chudnovsky/Pi%20-%20Dec%20-%20Chudnovsky%20-%205.ycd)
 - [Pi - Dec - Chudnovsky - 6.ycd](https://storage.googleapis.com/pi100t/Pi%20-%20Dec%20-%20Chudnovsky/Pi%20-%20Dec%20-%20Chudnovsky%20-%206.ycd)
 - [Pi - Dec - Chudnovsky - 7.ycd](https://storage.googleapis.com/pi100t/Pi%20-%20Dec%20-%20Chudnovsky/Pi%20-%20Dec%20-%20Chudnovsky%20-%207.ycd)
+- [Pi - Dec - Chudnovsky - 8.ycd](https://storage.googleapis.com/pi100t/Pi%20-%20Dec%20-%20Chudnovsky/Pi%20-%20Dec%20-%20Chudnovsky%20-%208.ycd)
+- [Pi - Dec - Chudnovsky - 9.ycd](https://storage.googleapis.com/pi100t/Pi%20-%20Dec%20-%20Chudnovsky/Pi%20-%20Dec%20-%20Chudnovsky%20-%209.ycd)
+- [Pi - Dec - Chudnovsky - 10.ycd](https://storage.googleapis.com/pi100t/Pi%20-%20Dec%20-%20Chudnovsky/Pi%20-%20Dec%20-%20Chudnovsky%20-%210.ycd)
 - ...
 
 # Extrair Número Pi
