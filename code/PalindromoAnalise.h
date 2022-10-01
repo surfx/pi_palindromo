@@ -125,23 +125,28 @@ public:
 
             if (analisarMemoria && start % limiar_analise_mem == 0)
             {
-                unsigned long memoriaDisponivel = MemInfo::getMemoriaDisponivel();
+                MemInfo meminfo;
+
+                unsigned long memoriaDisponivel = meminfo.getMemoriaDisponivel();
                 std::cout << "Análise de memória, disponível: " << memoriaDisponivel;
                 std::cout << " [" << start << ", " << end << "]" << std::endl;
 
-                if (tempo_espera_segundos > 0 && MemInfo::limiarAceito(40.0) == 0)
+                if (tempo_espera_segundos > 0 && meminfo.limiarAceito(40.0) == 0)
                 {
                     std::cout << "Waiting " << tempo_espera_segundos << "s" << std::endl;
                     std::this_thread::sleep_for(std::chrono::seconds(tempo_espera_segundos));
                 }
 
-                if (MemInfo::limiarAceito() == 0)
+                if (meminfo.limiarAceito() == 0)
                 {
                     std::cout << "--- Limiar de memória disponível (" << memoriaDisponivel << ") ultrapassado ---" << std::endl;
                     ctrl.saveControl(0, start, end, arq.readString(start, end));
                     arq.close();
+                    meminfo.close_file();
                     return rt;
                 }
+
+                meminfo.close_file();
             }
 
             start++;

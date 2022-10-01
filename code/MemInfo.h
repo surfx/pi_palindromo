@@ -9,23 +9,27 @@
 class MemInfo
 {
 private:
-    static unsigned long get_mem_info(std::string tokenParam = "MemTotal:")
+    std::ifstream file;
+
+    unsigned long get_mem_info(std::string tokenParam = "MemTotal:")
     {
+        if (!file.is_open())
+        {
+            open_file();
+        }
+        if (!file.is_open())
+        {
+            return -1;
+        }
+
+        file.seekg(0, file.beg); // início arquivo
         std::string token;
-        std::ifstream file("/proc/meminfo");
         while (file >> token)
         {
             if (token == tokenParam)
             {
                 unsigned long mem;
-                if (file >> mem)
-                {
-                    return mem;
-                }
-                else
-                {
-                    return 0;
-                }
+                return file >> mem ? mem : 0;
             }
             // Ignore the rest of the line
             file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -34,23 +38,28 @@ private:
     };
 
 public:
-    static unsigned long getMemoriaTotal()
+    MemInfo() { open_file(); }
+
+    void open_file() { file.open("/proc/meminfo"); }
+    void close_file() { file.close(); }
+
+    unsigned long getMemoriaTotal()
     {
         return get_mem_info("MemTotal:");
     };
 
-    static unsigned long getMemoriaDisponivel()
+    unsigned long getMemoriaDisponivel()
     {
         return get_mem_info("MemAvailable:");
     };
 
-    static double porcentagemMemoriaLivre()
+    double porcentagemMemoriaLivre()
     {
         return (100.0 * getMemoriaDisponivel()) / getMemoriaTotal();
     }
 
     // limiar % de memória livre aceita
-    static int limiarAceito(double limiar = 20.0)
+    int limiarAceito(double limiar = 20.0)
     {
         return (porcentagemMemoriaLivre() >= limiar) ? 1 : 0;
     }
